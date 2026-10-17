@@ -1,0 +1,30 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<div class="ride-edit-container">
+
+    <h1>Edit Ride</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Save Changes
+        </button>
+
+    </form>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'rides:ride-details' ride.pk %}'">
+
+        Cancel
+
+    </button>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<div class="ride-delete-container">
+
+    <h1>Delete Ride</h1>
+
+    <p>Are you sure you want to delete this ride?</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Confirm Delete
+        </button>
+
+    </form>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'rides:ride-details' ride.pk %}'">
+
+        Cancel
+
+    </button>
+
+</div>
+
+{% endblock %}

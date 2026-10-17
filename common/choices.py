@@ -54,3 +54,14 @@ class BulgarianCityChoices(models.TextChoices):
     MONTANA = 'Montana', 'Montana'
     VIDIN = 'Vidin', 'Vidin'
     OTHER = 'Other', 'Other'
+
+class RoadTypeChoices(models.TextChoices):
+    ASPHALT = 'Asphalt', 'Asphalt'
+    OFFROAD = 'Offroad', 'Offroad'
+    GRAVEL = 'Gravel', 'Gravel'
+    DIRT = 'Dirt', 'Dirt'
+    HIGHWAY = 'Highway', 'Highway'
+    VILLAGE = 'Village', 'Village'
+    MOUNTAIN = 'Mountain', 'Mountain'
+    TWISTY = 'Twisty', 'Twisty'
+    
