@@ -1,0 +1,12 @@
+{#{% extends 'common/base.html' %}#}
+{% block content %}
+    <h1>All Riders</h1>
+{% if riders %}
+{% for rider in riders %}
+{{ rider.full_name }} - {{ rider.nickname }}
+{% endfor %}
+{% else %}
+    <p>No riders yet.</p>
+
+{% endif %}
+{% endblock %}

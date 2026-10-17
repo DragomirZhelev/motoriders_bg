@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<div class="rider-create-container">
+
+    <h1>Create Rider Profile</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Create Rider</button>
+    </form>
+
+    <button type="button" onclick="location.href='{% url 'riders:rider-list' %}'">
+        Cancel
+    </button>
+
+</div>
+
+{% endblock %}
