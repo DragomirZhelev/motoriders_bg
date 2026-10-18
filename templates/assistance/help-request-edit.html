@@ -1,0 +1,30 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<div class="help-request-edit-container">
+
+    <h1>Edit Help Request</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Save Changes
+        </button>
+
+    </form>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'assistance:help-request-details' help_request.pk %}'">
+
+        Cancel
+
+    </button>
+
+</div>
+
+{% endblock %}

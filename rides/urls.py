@@ -1,6 +1,7 @@
 from django.urls import path
 
-from rides.views import RideListView, RideDetailView, RideCreateView, RideEditView, RideDeleteView
+from rides.views import RideListView, RideDetailView, RideCreateView, RideEditView, RideDeleteView, \
+    RideReviewCreateView, RideReviewListView, RideReviewEditView, RideReviewDeleteView, RideReviewDetailView
 
 app_name = 'rides'
 urlpatterns = [
@@ -13,6 +14,18 @@ urlpatterns = [
     path('edit/<int:pk>/', RideEditView.as_view(), name='ride-edit'),
 
     path('delete/<int:pk>/', RideDeleteView.as_view(), name='ride-delete'),
+
+    path('ride-review/create/', RideReviewCreateView.as_view(), name='ride-review-create'),
+
+    path('ride-review/list/', RideReviewListView.as_view(), name='ride-review-list'),
+
+    path('ride-review/edit/<int:pk>/', RideReviewEditView.as_view(), name='ride-review-edit'),
+
+    path('ride-review/delete/<int:pk>/', RideReviewDeleteView.as_view(), name='ride-review-delete'),
+
+    path('ride-review/details/<int:pk>/', RideReviewDetailView.as_view(), name='ride-review-details'),
+
+
 
 
 

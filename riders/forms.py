@@ -71,6 +71,43 @@ class RiderBaseForm(forms.ModelForm):
         }
 
 
+        error_messages = {
+            'first_name': {'required': 'Please, provide your first name',
+                           'max_length': 'First name can not be more than 50 characters'},
+            'last_name': {'required': 'Please, provide your last name',
+                          'max_length': 'Last name can not be more than 50 characters'},
+
+            'nickname': {'required': 'Please, provide your nickname',
+                         'max_length': 'Nickname can not be more than 50 characters',
+                         'unique': 'Nickname must be unique'},
+
+            'city': {'required': 'Please, select your city',
+                     'invalid_choice': 'Please select a valid city'},
+
+            'custom_city_or_village': {'max_length': 'Name of city or village can not be more than 100 characters',},
+
+            'motorcycle_brand': {'required': 'Please, provide your motorcycle brand',
+                                 'max_length': 'Motorcycle brand can not be more than 50 characters'},
+
+            'motorcycle_model': {'required': 'Please, provide your motorcycle model',
+                                 'max_length': 'Motorcycle model can not be more than 50 characters'},
+
+            'motorcycle_type': {'required': 'Please, select your motorcycle type',
+                                'invalid_choice': 'Please, select a valid motorcycle type'},
+
+            'experience_years': {'required': 'Please, provide your experience years as rider',
+                                 'invalid': 'Please, provide valid number of years between 0 and 100'},
+            'phone_number': {'required': 'Please, provide your phone number',
+                             'invalid': 'Phone number must contain only digits',},
+
+            'email': {'invalid': 'Please, provide a valid email address',},
+
+            'motorcyclist_image': {'invalid': 'Please, provide a valid motorcyclist image file',},
+
+            'short_bio': {'max_length': 'Short bio text can not be more than 500 characters',},
+        }
+
+
     def clean(self):
         cleaned_data = super().clean()
 
@@ -78,7 +115,7 @@ class RiderBaseForm(forms.ModelForm):
         custom_city_or_village = cleaned_data.get('custom_city_or_village')
 
         if city == choices.BulgarianCityChoices.OTHER and not custom_city_or_village:
-            self.add_error('custom_city_or_village', 'Please provide a city or a village name.')
+            self.add_error('custom_city_or_village', 'Please provide a city or a village name if Other is selected in the field above.')
 
         return cleaned_data
 

@@ -1,0 +1,67 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<div class="ride-review-list-container">
+
+    <h1>Ride Reviews</h1>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'rides:ride-review-create' %}'">
+
+        Create Ride Review
+
+    </button>
+
+    {% if ride_reviews %}
+
+        {% for ride_review in ride_reviews %}
+
+            <div class="ride-review-card">
+
+                <h2>
+                    Ride: {{ ride_review.ride }}
+                </h2>
+
+                <p>
+                    <strong>Reviewer:</strong>
+                    {{ ride_review.reviewer }}
+                </p>
+
+                <p>
+                    <strong>Overall Rating:</strong>
+                    {{ ride_review.overall_rating }}/10
+                </p>
+
+                <p>
+                    <strong>Road Condition:</strong>
+                    {{ ride_review.road_condition_rating }}/10
+                </p>
+
+                <p>
+                    <strong>Scenery:</strong>
+                    {{ ride_review.scenery_rating }}/10
+                </p>
+
+                <button
+                    type="button"
+                    onclick="location.href='{% url 'rides:ride-review-details' ride_review.pk %}'">
+
+                    View Details
+
+                </button>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No ride reviews available.</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

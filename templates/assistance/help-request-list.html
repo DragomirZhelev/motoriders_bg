@@ -1,0 +1,65 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<div class="help-request-list-container">
+
+    <h1>Help Requests</h1>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'assistance:help-request-create' %}'">
+
+        Create Help Request
+
+    </button>
+
+    {% if help_requests %}
+
+        {% for help_request in help_requests %}
+
+            <div class="help-request-card">
+
+                <h2>{{ help_request.title }}</h2>
+
+                <p>
+                    <strong>Rider:</strong>
+                    {{ help_request.rider }}
+                </p>
+
+                <p>
+                    <strong>Urgency:</strong>
+                    {{ help_request.urgency }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ help_request.status }}
+                </p>
+
+                <p>
+                    <strong>Location:</strong>
+                    {{ help_request.location }}
+                </p>
+
+                <button
+                    type="button"
+                    onclick="location.href='{% url 'assistance:help-request-details' help_request.pk %}'">
+
+                    View Details
+
+                </button>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No help requests available.</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+<{% extends 'common/base.html' %}
+
+{% block content %}
+
+<div class="help-request-details-container">
+
+    <h1>Help Request Details</h1>
+
+    <p>
+        <strong>Rider:</strong>
+        {{ help_request.rider }}
+    </p>
+
+    <p>
+        <strong>Title:</strong>
+        {{ help_request.title }}
+    </p>
+
+    <p>
+        <strong>Description:</strong>
+        {{ help_request.issue_description }}
+    </p>
+
+    <p>
+        <strong>Urgency:</strong>
+        {{ help_request.urgency }}
+    </p>
+
+    <p>
+        <strong>Location:</strong>
+        {{ help_request.location }}
+    </p>
+
+    <p>
+        <strong>Status:</strong>
+        {{ help_request.status }}
+    </p>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'assistance:help-request-edit' help_request.pk %}'">
+
+        Edit Request
+
+    </button>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'assistance:help-request-delete' help_request.pk %}'">
+
+        Delete Request
+
+    </button>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'assistance:help-request-list' %}'">
+
+        Back to Requests
+
+    </button>
+
+</div>
+
+{% endblock %}

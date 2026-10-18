@@ -1,0 +1,73 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<div class="ride-review-details-container">
+
+    <h1>Ride Review Details</h1>
+
+    <p>
+        <strong>Ride:</strong>
+        {{ ride_review.ride }}
+    </p>
+
+    <p>
+        <strong>Reviewer:</strong>
+        {{ ride_review.reviewer }}
+    </p>
+
+    <p>
+        <strong>Overall Rating:</strong>
+        {{ ride_review.overall_rating }}/10
+    </p>
+
+    <p>
+        <strong>Road Condition Rating:</strong>
+        {{ ride_review.road_condition_rating }}/10
+    </p>
+
+    <p>
+        <strong>Scenery Rating:</strong>
+        {{ ride_review.scenery_rating }}/10
+    </p>
+
+    <p>
+        <strong>Riding Difficulty:</strong>
+        {{ ride_review.riding_difficulty }}
+    </p>
+
+    <p>
+        <strong>Review:</strong>
+    </p>
+
+    <p>
+        {{ ride_review.review_text }}
+    </p>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'rides:ride-review-edit' ride_review.pk %}'">
+
+        Edit Review
+
+    </button>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'rides:ride-review-delete' ride_review.pk %}'">
+
+        Delete Review
+
+    </button>
+
+    <button
+        type="button"
+        onclick="location.href='{% url 'rides:ride-review-list' %}'">
+
+        Back to Reviews
+
+    </button>
+
+</div>
+
+{% endblock %}

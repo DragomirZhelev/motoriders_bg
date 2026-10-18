@@ -22,7 +22,7 @@ class Ride(TimeStamp, LocationMixin):
     road_difficulty = models.CharField(max_length=100, choices = choices.RoadDifficultyChoices.choices)
     status = models.CharField(max_length=50, choices=choices.TripStatusChoices.choices, blank = False, null = False)
     maximum_riders_to_join = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(100)])
-    description = models.TextField(validators=[MinLengthValidator(20)])
+    description = models.TextField(validators=[MinLengthValidator(20), MaxLengthValidator(500)])
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
 
