@@ -12,7 +12,12 @@
 
             <div class="ride-card">
 
-                <h2>{{ ride.title }}</h2>
+                <h2>Ride Title: {{ ride.title }}</h2>
+
+                 <p>
+                    <strong>Ride Organizer:</strong>
+                    {{ ride.ride_organizer }}
+                </p>
 
                 <p>
                     <strong>Meeting Point:</strong>
@@ -39,10 +44,9 @@
                     {{ ride.status }}
                 </p>
 
-                <button type="button"
-                        onclick="location.href='{% url 'rides:ride-details' ride.pk %}'">
+                <a href="{% url 'rides:ride-details' ride.pk %}">
                     View Details
-                </button>
+                </a>
 
             </div>
 

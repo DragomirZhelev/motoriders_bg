@@ -1,5 +1,5 @@
 {% extends 'common/base.html' %}
-
+{% load rider_tags %}
 {% block content %}
 
 <div class="rider-details-container">
@@ -30,8 +30,8 @@
     <div class="rider-motorcycle-section">
         <h3>Motorcycle Information</h3>
 
-        <p><strong>Brand:</strong> {{ rider.motorcycle_brand }}</p>
-        <p><strong>Model:</strong> {{ rider.motorcycle_model }}</p>
+        <p><strong>Brand:</strong> {{ rider.motorcycle_brand | capfirst }}</p>
+        <p><strong>Model:</strong> {{ rider.motorcycle_model | capfirst }}</p>
         <p><strong>Type:</strong> {{ rider.motorcycle_type }}</p>
     </div>
 
@@ -46,16 +46,43 @@
         <p><strong>Phone:</strong> {{ rider.phone_number }}</p>
 
         {% if rider.email %}
-            <p><strong>Email:</strong> {{ rider.email }}</p>
+            <p><strong>Email:</strong> {{ rider.email | lower }}</p>
         {% endif %}
     </div>
 
     {% if rider.short_bio %}
         <div class="rider-bio-section">
             <h3>About Me</h3>
-            <p>{{ rider.short_bio }}</p>
+            <p>{{ rider.short_bio | linebreaks}}</p>
         </div>
     {% endif %}
+
+    <div class="rider_num_reviews_num_rides_organized">
+        <p>
+            <strong>Number Reviews Submitted:</strong>
+            {%  number_of_reviews_per_rider rider %}
+        </p>
+         <p>
+            <strong>Number Rides Organized:</strong>
+            {%  number_organized_rides rider %}
+        </p>
+
+    </div>
+
+    <div class="rider_created_at_updated_at">
+        <p>
+        <strong>Profile Created:</strong>
+        {{ rider.created_at | date:'d M Y' }}
+        </p>
+
+        <p>
+        <strong>Last Updated:</strong>
+        {{ rider.updated_at | date:'d M Y' }}
+        </p>
+
+
+
+    </div>
 
     <div class="rider-actions">
         <a href="{% url 'riders:rider-edit' rider.pk %}">

@@ -18,13 +18,11 @@
         </button>
     </form>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'rides:ride-review-details' ride_review.pk %}'">
+    <a href='{% url 'rides:ride-review-details' ride_review.pk %}'>
 
         Cancel
 
-    </button>
+    </A>
 
 </div>
 

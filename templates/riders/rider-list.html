@@ -1,12 +1,31 @@
-{#{% extends 'common/base.html' %}#}
+{% extends 'common/base.html' %}
+
 {% block content %}
-    <h1>All Riders</h1>
+
+
+
+<h1>All Riders</h1>
+<a href="{% url 'riders:rider-create' %}"> Create a New Rider</a>
+
 {% if riders %}
-{% for rider in riders %}
-{{ rider.full_name }} - {{ rider.nickname }}
-{% endfor %}
+    {% for rider in riders %}
+        <div>
+            <h3>{{ rider.full_name }}</h3>
+
+            <p>
+                <strong>Nickname:</strong>
+                {{ rider.nickname }}
+            </p>
+
+            <a href="{% url 'riders:rider-details' rider.pk %}">
+                View Details
+            </a>
+        </div>
+
+        <hr>
+    {% endfor %}
 {% else %}
     <p>No riders yet.</p>
-
 {% endif %}
+
 {% endblock %}

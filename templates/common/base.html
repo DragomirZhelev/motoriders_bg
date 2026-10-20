@@ -6,27 +6,25 @@
     <title>Motoriders BG</title>
 </head>
 <body>
+    <header>
+        <h1>Motoriders BG</h1>
+    </header>
 
-<header>
-    <h1>Motoriders BG</h1>
-</header>
+    <nav>
+        <a href="{% url 'home-page' %}">Home</a>
+        <a href="{% url 'riders:rider-list' %}">Riders</a>
+        <a href="{% url 'rides:ride-list' %}">Rides</a>
+        <a href="{% url 'rides:ride-review-list' %}">Reviews</a>
+        <a href="{% url 'assistance:help-request-list' %}">Road Assistance</a>
+    </nav>
 
-<nav>
-    <button type="button">Home</button>
-    <button type="button">Riders</button>
-    <button type="button">Rides</button>
-    <button type="button">Reviews</button>
-    <button type="button">Road Assistance</button>
-</nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 
-<main>
-    {% block content %}
-    {% endblock %}
-</main>
-
-<footer>
-    <p>Motoriders BG © 2026</p>
-</footer>
-
+    <footer>
+        <p>Motoriders BG &copy; 2026</p>
+    </footer>
 </body>
 </html>

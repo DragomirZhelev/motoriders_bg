@@ -1,4 +1,6 @@
 from django import forms
+
+from riders.models import Rider
 from rides.models import Ride, RideReview
 from django.utils import timezone
 from common import choices
@@ -268,3 +270,17 @@ class RideReviewDeleteForm(RideReviewBaseForm):
 
         for field in self.fields.values():
             field.disabled = True
+
+
+
+
+class JoinRideForm(forms.Form):
+    rider = forms.ModelChoiceField(
+        queryset=Rider.objects.all(),
+        label='Rider',
+        help_text='Select the rider to join the ride',
+        widget=forms.Select(),
+        error_messages={'required': 'Please, select the rider to join the ride.',
+                        'invalid_choice': 'Please, select a valid rider to join the ride.'},
+    )
+

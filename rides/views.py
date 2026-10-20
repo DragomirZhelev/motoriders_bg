@@ -1,9 +1,12 @@
-from django.shortcuts import render
+
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from riders.models import Rider
 # Create your views here.
 from rides.models import Ride, RideReview
-from rides.forms import RideCreateForm, RideEditForm, RideDeleteForm, RideReviewCreateForm, RideReviewEditForm, RideReviewDeleteForm
+from rides.forms import RideCreateForm, RideEditForm, RideDeleteForm, RideReviewCreateForm, RideReviewEditForm, RideReviewDeleteForm, JoinRideForm
 
 class RideListView(ListView):
     model = Ride
@@ -87,3 +90,38 @@ class RideReviewDeleteView(DeleteView):
         return context
 
 
+def join_ride(request, pk):
+    ride = get_object_or_404(Ride, pk=pk)
+
+    if request.method == 'POST':
+        form = JoinRideForm(request.POST)
+        if form.is_valid():
+            rider = form.cleaned_data['rider']
+
+            if rider == ride.ride_organizer:
+                # raise ValidationError('The organizer of the ride can not join the participants list')
+                form.add_error('rider', 'The organizer of the ride shall not join as participant')
+            elif rider in ride.participants.all():
+                form.add_error('rider', 'This rider is already part of the participants list')
+            else:
+                ride.participants.add(rider)
+
+                return redirect('rides:ride-details', pk=ride.pk)
+
+    else:
+        form = JoinRideForm()
+
+    context = {'ride': ride, 'form': form,}
+
+    return render(request, 'rides/ride-join.html', context)
+
+
+def leave_ride(request, pk, rider_pk):
+    ride = get_object_or_404(Ride, pk=pk)
+
+    rider = get_object_or_404(Rider, pk=rider_pk)
+
+    if rider in ride.participants.all():
+        ride.participants.remove(rider)
+
+    return redirect('rides:ride-details', pk=pk)

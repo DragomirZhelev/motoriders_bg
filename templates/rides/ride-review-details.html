@@ -1,5 +1,5 @@
 {% extends 'common/base.html' %}
-
+{%  load ridereview_tags %}
 {% block content %}
 
 <div class="ride-review-details-container">
@@ -18,17 +18,20 @@
 
     <p>
         <strong>Overall Rating:</strong>
-        {{ ride_review.overall_rating }}/10
+        {{ ride_review.overall_rating}}/10
+        {{ ride_review.overall_rating | overall_rating_color  }}
     </p>
 
     <p>
         <strong>Road Condition Rating:</strong>
         {{ ride_review.road_condition_rating }}/10
+        {{ ride_review.road_condition_rating | road_condition_rating_color}}
     </p>
 
     <p>
         <strong>Scenery Rating:</strong>
         {{ ride_review.scenery_rating }}/10
+        {{ ride_review.scenery_rating | scenery_rating_color}}
     </p>
 
     <p>
@@ -44,29 +47,23 @@
         {{ ride_review.review_text }}
     </p>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'rides:ride-review-edit' ride_review.pk %}'">
+    <a href='{% url 'rides:ride-review-edit' ride_review.pk %}'>
 
         Edit Review
 
-    </button>
+    </a>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'rides:ride-review-delete' ride_review.pk %}'">
+    <a href='{% url 'rides:ride-review-delete' ride_review.pk %}'>
 
         Delete Review
 
-    </button>
+    </a>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'rides:ride-review-list' %}'">
+    <a href='{% url 'rides:ride-review-list' %}'>
 
         Back to Reviews
 
-    </button>
+    </a>
 
 </div>
 

@@ -19,13 +19,11 @@
 
     </form>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'rides:ride-details' ride.pk %}'">
+    <a href='{% url 'rides:ride-details' ride.pk %}'>
 
         Cancel
 
-    </button>
+    </a>
 
 </div>
 

@@ -16,11 +16,16 @@ class RoadDifficultyChoices(models.TextChoices):
     INTERMEDIATE = 'Intermediate', 'Intermediate'
     ADVANCED = 'Advanced', 'Advanced'
 
+class RidingDifficultyChoices(models.TextChoices):
+    EASY = 'Easy', 'Easy'
+    MODERATE = 'Moderate', 'Moderate'
+    HARD = 'Hard', 'Hard'
+
 
 class TripStatusChoices(models.TextChoices):
     PLANNED = 'Planned', 'Planned'
     COMPLETED = 'Completed', 'Completed'
-    CANCELED = 'Canceled', 'Canceled'
+    CANCELLED = 'Cancelled', 'Cancelled'
 
 class UrgencyChoices(models.TextChoices):
     LOW = 'Low', 'Low'

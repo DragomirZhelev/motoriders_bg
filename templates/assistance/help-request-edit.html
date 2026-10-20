@@ -17,13 +17,11 @@
 
     </form>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'assistance:help-request-details' help_request.pk %}'">
+    <a href='{% url 'assistance:help-request-details' help_request.pk %}'>
 
         Cancel
 
-    </button>
+    </a>
 
 </div>
 

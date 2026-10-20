@@ -1,5 +1,6 @@
 from django.urls import path
 
+from rides import views
 from rides.views import RideListView, RideDetailView, RideCreateView, RideEditView, RideDeleteView, \
     RideReviewCreateView, RideReviewListView, RideReviewEditView, RideReviewDeleteView, RideReviewDetailView
 
@@ -26,7 +27,9 @@ urlpatterns = [
     path('ride-review/details/<int:pk>/', RideReviewDetailView.as_view(), name='ride-review-details'),
 
 
+    path('join/<int:pk>/', views.join_ride, name='join-ride'),
 
+    path('leave/<int:pk>/<int:rider_pk>/', views.leave_ride, name='leave-ride'),
 
 
 ]

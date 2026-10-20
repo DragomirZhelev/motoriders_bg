@@ -25,7 +25,7 @@ urlpatterns = [
 
     path('assistance/', include('assistance.urls')),
 
-    path('common/', include('common.urls')),
+    path('', include('common.urls')),
 
     path('rides/', include('rides.urls')),
 

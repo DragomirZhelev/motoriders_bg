@@ -49,7 +49,7 @@ class RideReview(TimeStamp):
     overall_rating = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
     road_condition_rating = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
     scenery_rating = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
-    riding_difficulty = models.CharField(max_length=100, choices =choices.RoadDifficultyChoices.choices)
+    riding_difficulty = models.CharField(max_length=100, choices =choices.RidingDifficultyChoices.choices)
     review_text = models.TextField(validators=[MinLengthValidator(20), MaxLengthValidator(500)])
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)

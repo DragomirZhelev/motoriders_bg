@@ -36,29 +36,23 @@
         {{ help_request.status }}
     </p>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'assistance:help-request-edit' help_request.pk %}'">
+    <a href='{% url 'assistance:help-request-edit' help_request.pk %}'>
 
         Edit Request
 
-    </button>
+    </a>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'assistance:help-request-delete' help_request.pk %}'">
+    <a href='{% url 'assistance:help-request-delete' help_request.pk %}'>
 
         Delete Request
 
-    </button>
+    </a>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'assistance:help-request-list' %}'">
+    <a href='{% url 'assistance:help-request-list' %}'>
 
         Back to Requests
 
-    </button>
+    </a>
 
 </div>
 

@@ -6,13 +6,11 @@
 
     <h1>Help Requests</h1>
 
-    <button
-        type="button"
-        onclick="location.href='{% url 'assistance:help-request-create' %}'">
+    <a href='{% url 'assistance:help-request-create' %}'>
 
         Create Help Request
 
-    </button>
+    </a>
 
     {% if help_requests %}
 
@@ -42,13 +40,11 @@
                     {{ help_request.location }}
                 </p>
 
-                <button
-                    type="button"
-                    onclick="location.href='{% url 'assistance:help-request-details' help_request.pk %}'">
+                <a href='{% url 'assistance:help-request-details' help_request.pk %}'>
 
                     View Details
 
-                </button>
+                </a>
 
             </div>
 

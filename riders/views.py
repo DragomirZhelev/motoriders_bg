@@ -28,6 +28,8 @@ class RiderDeleteView(DeleteView):
     success_url = reverse_lazy('riders:rider-list')
     context_object_name = 'rider'
 
+
+    #check get_initial - ?
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 

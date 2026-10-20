@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+<h1>Join Ride</h1>
+
+<h2>{{ ride.title }}</h2>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Confirm Join
+    </button>
+
+</form>
+
+<a href="{% url 'rides:ride-details' ride.pk %}">
+    Cancel
+</a>
+
+{% endblock %}

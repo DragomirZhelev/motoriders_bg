@@ -1,16 +1,18 @@
 {% extends 'common/base.html' %}
-
+{% load ride_filters %}
 {% block content %}
 
 <div class="ride-details-container">
 
     <div class="ride-header">
-        <h1>{{ ride.title }}</h1>
+        <h1>Ride Title: {{ ride.title }}</h1>
     </div>
 
     <div class="ride-general-information">
 
         <h2>Ride Information</h2>
+
+        <p><strong>Ride Organizer: {{ ride.ride_organizer }}</strong></p>
 
         <p><strong>Meeting Point:</strong> {{ ride.meeting_point }}</p>
 
@@ -26,9 +28,18 @@
 
         <p><strong>Road Difficulty:</strong> {{ ride.road_difficulty }}</p>
 
-        <p><strong>Status:</strong> {{ ride.status }}</p>
+        <p><strong>Status:</strong> {{ ride.status | status_of_the_ride_color }}</p>
 
         <p><strong>Maximum Riders:</strong> {{ ride.maximum_riders_to_join }}</p>
+
+        <p><strong>Current Number of Participants:</strong>
+            {{ ride | count_participants }}
+        </p>
+
+        <p>
+            <strong>Remaining Slots for the Ride:</strong>
+            {{ ride | remaining_slots }}
+        </p>
 
     </div>
 
@@ -52,6 +63,7 @@
 
                     <li>
                         {{ participant.nickname }}
+                        <a href="{% url 'rides:leave-ride' ride.pk participant.pk %}">Leave Ride</a>
                     </li>
 
                 {% endfor %}
@@ -68,20 +80,23 @@
 
     <div class="ride-actions">
 
-        <button type="button"
-                onclick="location.href='{% url 'rides:ride-edit' ride.pk %}'">
+        <a href='{% url 'rides:ride-edit' ride.pk %}'>
             Edit Ride
-        </button>
+        </a>
 
-        <button type="button"
-                onclick="location.href='{% url 'rides:ride-delete' ride.pk %}'">
+        <a href='{% url 'rides:ride-delete' ride.pk %}'>
             Delete Ride
-        </button>
+        </a>
 
-        <button type="button"
-                onclick="location.href='{% url 'rides:ride-list' %}'">
+        <a href='{% url 'rides:ride-list' %}'>
             Back to Rides
-        </button>
+        </a>
+
+        {% if ride.status == 'Planned' and ride.participants.count < ride.maximum_riders_to_join %}
+            <a href='{% url 'rides:join-ride' ride.pk %}'>
+            Join Ride
+            </a>
+{% endif %}
 
     </div>
 

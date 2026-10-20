@@ -26,9 +26,9 @@
         </button>
     </form>
 
-    <button type="button" onclick="location.href='{% url 'riders:rider-details' rider.pk %}'">
+    <a href='{% url 'riders:rider-details' rider.pk %}'>
         Cancel
-    </button>
+    </a>
 
 </div>
 

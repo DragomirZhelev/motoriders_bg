@@ -44,13 +44,11 @@
                     {{ ride_review.scenery_rating }}/10
                 </p>
 
-                <button
-                    type="button"
-                    onclick="location.href='{% url 'rides:ride-review-details' ride_review.pk %}'">
+                <a href='{% url 'rides:ride-review-details' ride_review.pk %}'>
 
                     View Details
 
-                </button>
+                </a>
 
             </div>
 
