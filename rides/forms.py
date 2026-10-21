@@ -119,6 +119,15 @@ class RideBaseForm(forms.ModelForm):
                             'max_length': 'Description must be less than 500 characters'},
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance.road_types:
+            road_types_as_list = self.instance.road_types.split(',')
+            stripped_road_types = [road_type.strip() for road_type in road_types_as_list]
+            self.initial['road_types'] = stripped_road_types
+
+
 
 
     def clean(self):
@@ -127,8 +136,15 @@ class RideBaseForm(forms.ModelForm):
         city = cleaned_data.get('city')
         custom_city_or_village = cleaned_data.get('custom_city_or_village')
 
+        if custom_city_or_village:
+            custom_city_or_village = custom_city_or_village.strip()
+            cleaned_data['custom_city_or_village'] = custom_city_or_village
+
         if city == choices.BulgarianCityChoices.OTHER and not custom_city_or_village:
             self.add_error('custom_city_or_village', 'Please provide a city or a village name if Other is selected in the field above.')
+
+        if city != choices.BulgarianCityChoices.OTHER and custom_city_or_village:
+            self.add_error('custom_city_or_village', 'You can not use this field when a city different than OTHER is selected')
 
         return cleaned_data
 
@@ -146,21 +162,6 @@ class RideBaseForm(forms.ModelForm):
 
 
 
-
-
-# def clean(self):
-#     cleaned_data = super().clean()
-#
-#     city = cleaned_data.get('city')
-#     custom_city = cleaned_data.get('custom_city_or_village')
-#
-#     if city == 'Other' and not custom_city:
-#         self.add_error(
-#             'custom_city_or_village',
-#             'Please provide the city or village name.'
-#         )
-#
-#     return cleaned_data
 
 class RideCreateForm(RideBaseForm):
     pass

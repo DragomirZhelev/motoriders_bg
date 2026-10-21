@@ -37,6 +37,8 @@ class Ride(TimeStamp, LocationMixin):
 # ADD TO THE SEARCH FOR:
 # rides = Ride.objects.filter(
 #     Q(title__icontains=query) |
+#     Q(ride_organizer__icontains = query)
+
 #     Q(meeting_point__icontains=query) |
 #     Q(destination__icontains=query) |
 #     Q(road_types__icontains=query)

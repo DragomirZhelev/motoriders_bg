@@ -1,0 +1,38 @@
+<div class="card bg-dark text-light border-secondary shadow mb-3">
+
+    <div class="card-body">
+
+        <h2 class="card-title">
+            {{ help_request.title }}
+        </h2>
+
+        <p class="card-text">
+            <strong>Rider:</strong>
+            {{ help_request.rider }}
+        </p>
+
+        <p class="card-text">
+            <strong>Urgency:</strong>
+            {{ help_request.urgency }}
+        </p>
+
+        <p class="card-text">
+            <strong>Status:</strong>
+            {{ help_request.status }}
+        </p>
+
+        <p class="card-text">
+            <strong>Location:</strong>
+            {{ help_request.location }}
+        </p>
+
+        <a
+            href="{% url 'assistance:help-request-details' help_request.pk %}"
+            class="btn btn-info"
+        >
+            View Details
+        </a>
+
+    </div>
+
+</div>

@@ -2,104 +2,117 @@
 {% load ride_filters %}
 {% block content %}
 
-<div class="ride-details-container">
+    <div class="ride-details-container">
 
-    <div class="ride-header">
-        <h1>Ride Title: {{ ride.title }}</h1>
-    </div>
+        <div class="ride-header">
+            <h1>Ride Title: {{ ride.title }}</h1>
+        </div>
 
-    <div class="ride-general-information">
+        <div class="ride-general-information">
 
-        <h2>Ride Information</h2>
+            <h2>Ride Information</h2>
 
-        <p><strong>Ride Organizer: {{ ride.ride_organizer }}</strong></p>
+            <p><strong>Ride Organizer: {{ ride.ride_organizer }}</strong></p>
 
-        <p><strong>Meeting Point:</strong> {{ ride.meeting_point }}</p>
+            <p><strong>Meeting Point:</strong> {{ ride.meeting_point }}</p>
 
-        <p><strong>Destination:</strong> {{ ride.destination }}</p>
+            <p><strong>Destination:</strong> {{ ride.destination }}</p>
 
-        <p><strong>Departure:</strong> {{ ride.departure_date }}</p>
+            <p><strong>Departure:</strong> {{ ride.departure_date }}</p>
 
-        <p><strong>Estimated Duration:</strong> {{ ride.estimated_duration_hours }} hours</p>
+            <p><strong>Estimated Duration:</strong> {{ ride.estimated_duration_hours }} hours</p>
 
-        <p><strong>Distance:</strong> {{ ride.distance }} km</p>
+            <p><strong>Distance:</strong> {{ ride.distance }} km</p>
 
-        <p><strong>Road Types:</strong> {{ ride.road_types }}</p>
+            <p><strong>Road Types:</strong> {{ ride.road_types }}</p>
 
-        <p><strong>Road Difficulty:</strong> {{ ride.road_difficulty }}</p>
+            <p><strong>Road Difficulty:</strong> {{ ride.road_difficulty }}</p>
 
-        <p><strong>Status:</strong> {{ ride.status | status_of_the_ride_color }}</p>
+            <p><strong>Status:</strong> {{ ride.status | status_of_the_ride_color }}</p>
 
-        <p><strong>Maximum Riders:</strong> {{ ride.maximum_riders_to_join }}</p>
+            <p><strong>Maximum Riders:</strong> {{ ride.maximum_riders_to_join }}</p>
 
-        <p><strong>Current Number of Participants:</strong>
-            {{ ride | count_participants }}
-        </p>
+            <p><strong>Current Number of Participants:</strong>
+                {{ ride | count_participants }}
+            </p>
 
-        <p>
-            <strong>Remaining Slots for the Ride:</strong>
-            {{ ride | remaining_slots }}
-        </p>
+            <p>
+                <strong>Remaining Slots for the Ride:</strong>
+                {{ ride | remaining_slots }}
+            </p>
 
-    </div>
+        </div>
 
-    <div class="ride-description">
+        <div class="ride-description">
 
-        <h2>Description</h2>
+            <h2>Description</h2>
 
-        <p>{{ ride.description }}</p>
+            <p>{{ ride.description }}</p>
 
-    </div>
+        </div>
 
-    <div class="ride-participants">
+        <div class="ride-participants">
 
-        <h2>Participants</h2>
+            <h2>Participants</h2>
 
-        {% if ride.participants.all %}
+            {% if ride.participants.all %}
 
-            <ul>
+                <ul>
 
-                {% for participant in ride.participants.all %}
+                    {% for participant in ride.participants.all %}
 
-                    <li>
-                        {{ participant.nickname }}
-                        <a href="{% url 'rides:leave-ride' ride.pk participant.pk %}">Leave Ride</a>
-                    </li>
+                        <li>
+                            {{ participant.nickname }}
+                            <form
+                                    method="post"
+                                    action="{% url 'rides:leave-ride' ride.pk participant.pk %}"
+                                    class="d-inline"
+                            >
+                                {% csrf_token %}
 
-                {% endfor %}
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    Leave Ride
+                                </button>
+                            </form>
+                        </li>
 
-            </ul>
+                    {% endfor %}
 
-        {% else %}
+                </ul>
 
-            <p>No participants yet.</p>
+            {% else %}
 
-        {% endif %}
+                <p>No participants yet.</p>
 
-    </div>
+            {% endif %}
 
-    <div class="ride-actions">
+        </div>
 
-        <a href='{% url 'rides:ride-edit' ride.pk %}'>
-            Edit Ride
-        </a>
+        <div class="ride-actions">
 
-        <a href='{% url 'rides:ride-delete' ride.pk %}'>
-            Delete Ride
-        </a>
-
-        <a href='{% url 'rides:ride-list' %}'>
-            Back to Rides
-        </a>
-
-        {% if ride.status == 'Planned' and ride.participants.count < ride.maximum_riders_to_join %}
-            <a href='{% url 'rides:join-ride' ride.pk %}'>
-            Join Ride
+            <a href='{% url 'rides:ride-edit' ride.pk %}'>
+                Edit Ride
             </a>
-{% endif %}
+
+            <a href='{% url 'rides:ride-delete' ride.pk %}'>
+                Delete Ride
+            </a>
+
+
+
+            {% if ride.status == 'Planned' and ride.participants.count < ride.maximum_riders_to_join %}
+                <a href='{% url 'rides:join-ride' ride.pk %}'>
+                    Join Ride
+                </a>
+
+                <a href='{% url 'rides:ride-list' %}'>
+                    Back to Rides
+                </a>
+
+            {% endif %}
+
+        </div>
 
     </div>
-
-</div>
 
 {% endblock %}

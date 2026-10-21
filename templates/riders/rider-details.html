@@ -2,102 +2,102 @@
 {% load rider_tags %}
 {% block content %}
 
-<div class="rider-details-container">
+    <div class="rider-details-container">
 
-    <div class="rider-header">
-        <h1>{{ rider.nickname }}</h1>
-        <h2>{{ rider.full_name }}</h2>
-    </div>
-
-    <div class="rider-image-section">
-        {% if rider.motorcyclist_image %}
-            <img src="{{ rider.motorcyclist_image.url }}" alt="{{ rider.full_name }}" width="250">
-        {% else %}
-            <p>No profile photo available.</p>
-        {% endif %}
-    </div>
-
-    <div class="rider-location-section">
-        <h3>Location</h3>
-
-        {% if rider.city == 'Other' %}
-            <p>{{ rider.custom_city_or_village }}</p>
-        {% else %}
-            <p>{{ rider.city }}</p>
-        {% endif %}
-    </div>
-
-    <div class="rider-motorcycle-section">
-        <h3>Motorcycle Information</h3>
-
-        <p><strong>Brand:</strong> {{ rider.motorcycle_brand | capfirst }}</p>
-        <p><strong>Model:</strong> {{ rider.motorcycle_model | capfirst }}</p>
-        <p><strong>Type:</strong> {{ rider.motorcycle_type }}</p>
-    </div>
-
-    <div class="rider-experience-section">
-        <h3>Riding Experience</h3>
-        <p>{{ rider.experience_years }} years</p>
-    </div>
-
-    <div class="rider-contact-section">
-        <h3>Contact Information</h3>
-
-        <p><strong>Phone:</strong> {{ rider.phone_number }}</p>
-
-        {% if rider.email %}
-            <p><strong>Email:</strong> {{ rider.email | lower }}</p>
-        {% endif %}
-    </div>
-
-    {% if rider.short_bio %}
-        <div class="rider-bio-section">
-            <h3>About Me</h3>
-            <p>{{ rider.short_bio | linebreaks}}</p>
+        <div class="rider-header">
+            <h1>Nickname: {{ rider.nickname }}</h1>
+            <h2>Fullname: {{ rider.full_name }}</h2>
         </div>
-    {% endif %}
 
-    <div class="rider_num_reviews_num_rides_organized">
-        <p>
-            <strong>Number Reviews Submitted:</strong>
-            {%  number_of_reviews_per_rider rider %}
-        </p>
-         <p>
-            <strong>Number Rides Organized:</strong>
-            {%  number_organized_rides rider %}
-        </p>
+        <div class="rider-image-section">
+            <p><strong>Photo</strong></p>
+            {% if rider.motorcyclist_image %}
+                <img src="{{ rider.motorcyclist_image.url }}" alt="{{ rider.full_name }}" width="250">
+            {% else %}
+                <p>No profile photo available.</p>
+            {% endif %}
+        </div>
+
+        <div class="rider-location-section">
+            <h3>Location</h3>
+
+            {% if rider.city == 'Other' %}
+                <p>City: {{ rider.custom_city_or_village }}</p>
+            {% else %}
+                <p>City: {{ rider.city }}</p>
+            {% endif %}
+        </div>
+
+        <div class="rider-motorcycle-section">
+            <h3>Motorcycle Information</h3>
+
+            <p><strong>Brand:</strong> {{ rider.motorcycle_brand | capfirst }}</p>
+            <p><strong>Model:</strong> {{ rider.motorcycle_model | capfirst }}</p>
+            <p><strong>Type:</strong> {{ rider.motorcycle_type }}</p>
+        </div>
+
+        <div class="rider-experience-section">
+            <h3>Riding Experience</h3>
+            <p>{{ rider.experience_years }} years</p>
+        </div>
+
+        <div class="rider-contact-section">
+            <h3>Contact Information</h3>
+
+            <p><strong>Phone:</strong> {{ rider.phone_number }}</p>
+
+            {% if rider.email %}
+                <p><strong>Email:</strong> {{ rider.email | lower }}</p>
+            {% endif %}
+        </div>
+
+        {% if rider.short_bio %}
+            <div class="rider-bio-section">
+                <h3>About Me</h3>
+                <p>{{ rider.short_bio | linebreaks }}</p>
+            </div>
+        {% endif %}
+
+        <div class="rider_num_reviews_num_rides_organized">
+            <p>
+                <strong>Number Reviews Submitted:</strong>
+                {% number_of_reviews_per_rider rider %}
+            </p>
+            <p>
+                <strong>Number Rides Organized:</strong>
+                {% number_organized_rides rider %}
+            </p>
+
+        </div>
+
+        <div class="rider_created_at_updated_at">
+            <p>
+                <strong>Profile Created:</strong>
+                {{ rider.created_at | date:'d M Y' }}
+            </p>
+
+            <p>
+                <strong>Last Updated:</strong>
+                {{ rider.updated_at | date:'d M Y' }}
+            </p>
+
+
+        </div>
+
+        <div class="rider-actions">
+            <a href="{% url 'riders:rider-edit' rider.pk %}">
+                Edit Rider
+            </a>
+
+            <a href="{% url 'riders:rider-delete' rider.pk %}">
+                Delete Rider
+            </a>
+
+            <a href="{% url 'riders:rider-list' %}">
+                Back to Riders
+            </a>
+        </div>
 
     </div>
-
-    <div class="rider_created_at_updated_at">
-        <p>
-        <strong>Profile Created:</strong>
-        {{ rider.created_at | date:'d M Y' }}
-        </p>
-
-        <p>
-        <strong>Last Updated:</strong>
-        {{ rider.updated_at | date:'d M Y' }}
-        </p>
-
-
-
-    </div>
-
-    <div class="rider-actions">
-        <a href="{% url 'riders:rider-edit' rider.pk %}">
-            Edit Rider
-        </a>
-
-        <a href="{% url 'riders:rider-delete' rider.pk %}">
-            Delete Rider
-        </a>
-
-        <a href="{% url 'riders:rider-list' %}">
-            Back to Riders
-        </a>
-    </div>
-
-</div>
 
 {% endblock %}

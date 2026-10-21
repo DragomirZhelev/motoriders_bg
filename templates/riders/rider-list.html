@@ -4,28 +4,50 @@
 
 
 
-<h1>All Riders</h1>
-<a href="{% url 'riders:rider-create' %}"> Create a New Rider</a>
+    <h1>All Riders</h1>
+    <p>
+        <button type="button" class="btn btn-success" onclick="location.href='{% url 'riders:rider-create' %}'">
+            Create a New Rider
+        </button>
+    </p>
+    <form method="get" class="mb-4">
 
-{% if riders %}
-    {% for rider in riders %}
-        <div>
-            <h3>{{ rider.full_name }}</h3>
+        <div class="row g-2">
 
-            <p>
-                <strong>Nickname:</strong>
-                {{ rider.nickname }}
-            </p>
+            <div class="col-md-8">
 
-            <a href="{% url 'riders:rider-details' rider.pk %}">
-                View Details
-            </a>
+                <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Search by first name, last name or nickname"
+                        value="{{ request.GET.search|default:'' }}"
+                >
+
+            </div>
+
+            <div class="col-md-4">
+
+                <button
+                        type="submit"
+                        class="btn btn-info w-100">
+
+                    Search
+
+                </button>
+
+            </div>
+
         </div>
 
-        <hr>
-    {% endfor %}
-{% else %}
-    <p>No riders yet.</p>
-{% endif %}
+    </form>
+    {% if riders %}
+        {% for rider in riders %}
+            {% include 'riders/rider-card.html' %}
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No riders yet.</p>
+    {% endif %}
 
 {% endblock %}

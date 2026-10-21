@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from riders.models import Rider
 from riders.forms import RiderCreateForm, RiderEditForm, RiderDeleteForm
@@ -9,6 +10,20 @@ class RiderListView(ListView):
     model = Rider
     template_name = 'riders/rider-list.html'
     context_object_name = 'riders'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        search_query = self.request.GET.get('search')
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(first_name__icontains=search_query) |
+                Q(last_name__icontains=search_query) |
+                Q(nickname__icontains=search_query)
+            )
+
+        return queryset
 
 class RiderDetailView(DetailView):
     model = Rider

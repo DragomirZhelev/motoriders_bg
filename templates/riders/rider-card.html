@@ -1,0 +1,22 @@
+<div class="card bg-dark text-light border-secondary shadow mb-3">
+
+    <div class="card-body">
+
+        <h3 class="card-title">
+            {{ rider.full_name }}
+        </h3>
+
+        <p class="card-text">
+            <strong>Nickname:</strong>
+            {{ rider.nickname }}
+        </p>
+
+        <a
+                class="btn btn-info"
+                href="{% url 'riders:rider-details' rider.pk %}">
+            View Details
+        </a>
+
+    </div>
+
+</div>

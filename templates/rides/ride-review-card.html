@@ -1,0 +1,38 @@
+<div class="card bg-dark text-light border-secondary shadow mb-3">
+
+    <div class="card-body">
+
+        <h2 class="card-title">
+            Ride: {{ ride_review.ride }}
+        </h2>
+
+        <p class="card-text">
+            <strong>Reviewer:</strong>
+            {{ ride_review.reviewer }}
+        </p>
+
+        <p class="card-text">
+            <strong>Overall Rating:</strong>
+            {{ ride_review.overall_rating }}/10
+        </p>
+
+        <p class="card-text">
+            <strong>Road Condition:</strong>
+            {{ ride_review.road_condition_rating }}/10
+        </p>
+
+        <p class="card-text">
+            <strong>Scenery:</strong>
+            {{ ride_review.scenery_rating }}/10
+        </p>
+
+        <a
+            class="btn btn-info"
+            href="{% url 'rides:ride-review-details' ride_review.pk %}"
+        >
+            View Details
+        </a>
+
+    </div>
+
+</div>

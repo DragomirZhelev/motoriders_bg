@@ -10,6 +10,16 @@ class HelpRequestListView(ListView):
     template_name = 'assistance/help-request-list.html'
     context_object_name = 'help_requests'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        status = self.request.GET.get('status')
+
+        if status:
+            queryset = queryset.filter(status = status)
+
+        return queryset
+
 class HelpRequestDetailView(DetailView):
     model = HelpRequest
     template_name = 'assistance/help-request-details.html'

@@ -1,0 +1,46 @@
+<div class="card bg-dark text-light border-secondary shadow mb-3">
+
+    <div class="card-body">
+
+        <h2 class="card-title">
+            Ride Title: {{ ride.title }}
+        </h2>
+
+        <p class="card-text">
+            <strong>Ride Organizer:</strong>
+            {{ ride.ride_organizer }}
+        </p>
+
+        <p class="card-text">
+            <strong>Meeting Point:</strong>
+            {{ ride.meeting_point }}
+        </p>
+
+        <p class="card-text">
+            <strong>Destination:</strong>
+            {{ ride.destination }}
+        </p>
+
+        <p class="card-text">
+            <strong>Departure:</strong>
+            {{ ride.departure_date }}
+        </p>
+
+        <p class="card-text">
+            <strong>Difficulty:</strong>
+            {{ ride.road_difficulty }}
+        </p>
+
+        <p class="card-text">
+            <strong>Status:</strong>
+            {{ ride.status }}
+        </p>
+
+        <a href="{% url 'rides:ride-details' ride.pk %}"
+           class="btn btn-info">
+            View Details
+        </a>
+
+    </div>
+
+</div>

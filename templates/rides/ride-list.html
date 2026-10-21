@@ -2,62 +2,110 @@
 
 {% block content %}
 
-<div class="ride-list-container">
+    <div class="ride-list-container">
 
-    <h1>All Rides</h1>
 
-    {% if rides %}
+        <h1>All Rides</h1>
+        <p>
+            <button type='button' class="btn btn-success" onclick="location.href='{% url 'rides:ride-create' %}'">
+                Create a New Ride
+            </button>
+        </p>
 
-        {% for ride in rides %}
+        <form method="get" class="mb-4">
 
-            <div class="ride-card">
+            <div class="row g-2">
 
-                <h2>Ride Title: {{ ride.title }}</h2>
+                <div class="col-md-5">
 
-                 <p>
-                    <strong>Ride Organizer:</strong>
-                    {{ ride.ride_organizer }}
-                </p>
+                    <input
+                            type="text"
+                            name="search"
+                            class="form-control"
+                            placeholder="Search rides..."
+                            value="{{ request.GET.search|default:'' }}"
+                    >
 
-                <p>
-                    <strong>Meeting Point:</strong>
-                    {{ ride.meeting_point }}
-                </p>
+                </div>
 
-                <p>
-                    <strong>Destination:</strong>
-                    {{ ride.destination }}
-                </p>
+                <div class="col-md-3">
 
-                <p>
-                    <strong>Departure:</strong>
-                    {{ ride.departure_date }}
-                </p>
+                    <select
+                            name="status"
+                            class="form-select">
 
-                <p>
-                    <strong>Difficulty:</strong>
-                    {{ ride.road_difficulty }}
-                </p>
+                        <option value="">
+                            All Statuses
+                        </option>
 
-                <p>
-                    <strong>Status:</strong>
-                    {{ ride.status }}
-                </p>
+                        <option value="Planned">
+                            Planned
+                        </option>
 
-                <a href="{% url 'rides:ride-details' ride.pk %}">
-                    View Details
-                </a>
+                        <option value="Completed">
+                            Completed
+                        </option>
+
+                        <option value="Canceled">
+                            Canceled
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <select
+                            name="sort"
+                            class="form-select">
+
+                        <option value="">
+                            Default Sorting
+                        </option>
+
+                        <option value="latest">
+                            Latest Rides
+                        </option>
+
+                        <option value="oldest">
+                            Oldest Rides
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <button
+                            type="submit"
+                            class="btn btn-info w-100">
+
+                        Search
+
+                    </button>
+
+                </div>
 
             </div>
 
-        {% endfor %}
+        </form>
 
-    {% else %}
+        {% if rides %}
 
-        <p>No rides available.</p>
+            {% for ride in rides %}
 
-    {% endif %}
+                {% include 'rides/ride-card.html' %}
 
-</div>
+            {% endfor %}
+
+        {% else %}
+
+            <p>No rides available.</p>
+
+        {% endif %}
+
+    </div>
 
 {% endblock %}
