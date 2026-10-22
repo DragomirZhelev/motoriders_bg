@@ -107,15 +107,23 @@ class RiderBaseForm(forms.ModelForm):
             'short_bio': {'max_length': 'Short bio text can not be more than 500 characters',},
         }
 
-
     def clean(self):
         cleaned_data = super().clean()
 
         city = cleaned_data.get('city')
         custom_city_or_village = cleaned_data.get('custom_city_or_village')
 
+        if custom_city_or_village:
+            custom_city_or_village = custom_city_or_village.strip()
+            cleaned_data['custom_city_or_village'] = custom_city_or_village
+
         if city == choices.BulgarianCityChoices.OTHER and not custom_city_or_village:
-            self.add_error('custom_city_or_village', 'Please provide a city or a village name if Other is selected in the field above.')
+            self.add_error('custom_city_or_village',
+                           'Please provide a city or a village name if Other is selected in the field above.')
+
+        if city != choices.BulgarianCityChoices.OTHER and custom_city_or_village:
+            self.add_error('custom_city_or_village',
+                           'You can not use this field when a city different than OTHER is selected')
 
         return cleaned_data
 

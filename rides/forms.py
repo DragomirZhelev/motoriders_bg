@@ -144,7 +144,7 @@ class RideBaseForm(forms.ModelForm):
             self.add_error('custom_city_or_village', 'Please provide a city or a village name if Other is selected in the field above.')
 
         if city != choices.BulgarianCityChoices.OTHER and custom_city_or_village:
-            self.add_error('custom_city_or_village', 'You can not use this field when a city different than OTHER is selected')
+            self.add_error('custom_city_or_village', 'You can not use this field "Custom city or village" when a city different than OTHER is selected')
 
         return cleaned_data
 

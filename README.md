@@ -169,11 +169,10 @@ Stores roadside assistance requests created by riders.
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/DragomirZhelev/motoriders_bg
 cd motoriders_bg
 ```
 
-Replace `<repository-url>` with the public GitHub repository URL.
 
 ### 2. Create a virtual environment
 
@@ -230,6 +229,12 @@ http://127.0.0.1:8000/
 ## Environment Variables and Credentials
 
 No environment variables or external credentials are required to run the project locally with its default configuration.
+
+The project is configured for local development and uses Django's default development settings.
+
+The custom 404 error page is available in the project and can be tested by temporarily setting:
+
+DEBUG = False
 
 ## Main Pages
 
@@ -301,24 +306,6 @@ The project uses:
 Authentication and Django User management are intentionally not implemented because they are excluded from the project requirements.
 
 The application does not provide login, logout, registration, or role-based permissions.
-
-## Current Status
-
-Completed functionality includes:
-
-- Rider CRUD
-- Ride CRUD
-- RideReview CRUD
-- HelpRequest CRUD
-- Ride participation management
-- Searching, filtering, and sorting
-- Form and model validation
-- Custom template tags and filters
-- Reusable template partials
-- Custom 404 page
-- Bootstrap styling
-- Navigation and footer
-- Empty database support
 
 ## Author
 
