@@ -2,26 +2,25 @@
 
 {% block content %}
 
-<div class="ride-review-edit-container">
+{% include 'common/model-form-styles.html' %}
 
-    <h1>Edit Ride Review</h1>
-
-    <form method="post">
-        {% csrf_token %}
-
-        {{ form.as_p }}
-
-        <button type="submit">
-            Save Changes
-        </button>
-    </form>
-
-    <a href='{% url 'rides:ride-review-details' ride_review.pk %}'>
-
-        Cancel
-
-    </a>
-
+<div class="model-form-page ride-review-edit-container">
+    <div class="card model-form-card bg-dark text-light border-secondary shadow-lg">
+        <div class="card-header px-4 py-3">
+            <h1 class="h3 mb-0">Edit Ride Review</h1>
+            <p class="text-secondary mb-0 mt-2">Update your ratings and feedback.</p>
+        </div>
+        <div class="card-body p-4">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-flex flex-wrap gap-2 pt-2">
+                    <button type="submit" class="btn btn-danger">Save Changes</button>
+                    <a href="{% url 'rides:ride-review-details' ride_review.pk %}" class="btn btn-outline-light">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

@@ -2,28 +2,25 @@
 
 {% block content %}
 
-<div class="help-request-create-container">
+{% include 'common/model-form-styles.html' %}
 
-    <h1>Create Help Request</h1>
-
-    <form method="post">
-
-        {% csrf_token %}
-
-        {{ form.as_p }}
-
-        <button type="submit">
-            Submit Request
-        </button>
-
-    </form>
-
-    <a href='{% url 'assistance:help-request-list' %}'>
-
-        Cancel
-
-    </a>
-
+<div class="model-form-page help-request-create-container">
+    <div class="card model-form-card bg-dark text-light border-secondary shadow-lg">
+        <div class="card-header px-4 py-3">
+            <h1 class="h3 mb-0">Create Help Request</h1>
+            <p class="text-secondary mb-0 mt-2">Describe the issue and where assistance is needed.</p>
+        </div>
+        <div class="card-body p-4">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-flex flex-wrap gap-2 pt-2">
+                    <button type="submit" class="btn btn-danger">Submit Request</button>
+                    <a href="{% url 'assistance:help-request-list' %}" class="btn btn-outline-light">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

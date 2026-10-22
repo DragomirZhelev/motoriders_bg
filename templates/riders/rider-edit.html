@@ -2,14 +2,25 @@
 
 {% block content %}
 
-<h1>Edit Rider</h1>
+{% include 'common/model-form-styles.html' %}
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    {{ form.as_p }}
-
-    <button type="submit">Save Changes</button>
-</form>
+<div class="model-form-page rider-edit-container">
+    <div class="card model-form-card bg-dark text-light border-secondary shadow-lg">
+        <div class="card-header px-4 py-3">
+            <h1 class="h3 mb-0">Edit Rider Profile</h1>
+            <p class="text-secondary mb-0 mt-2">Update rider and motorcycle details.</p>
+        </div>
+        <div class="card-body p-4">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-flex flex-wrap gap-2 pt-2">
+                    <button type="submit" class="btn btn-danger">Save Changes</button>
+                    <a href="{% url 'riders:rider-details' rider.pk %}" class="btn btn-outline-light">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

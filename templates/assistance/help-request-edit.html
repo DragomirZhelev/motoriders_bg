@@ -2,22 +2,24 @@
 
 {% block content %}
 
-<div class="help-request-edit-container">
+{% include 'common/model-form-styles.html' %}
 
-    <h1>Edit Help Request</h1>
+<div class="model-form-page model-form-card help-request-edit-container card bg-dark text-light border-secondary shadow-lg p-4">
+
+    <h1 class="h3 border-bottom border-danger pb-3 mb-4">Edit Help Request</h1>
 
     <form method="post">
         {% csrf_token %}
 
         {{ form.as_p }}
 
-        <button type="submit">
+        <button type="submit" class="btn btn-danger">
             Save Changes
         </button>
 
     </form>
 
-    <a href='{% url 'assistance:help-request-details' help_request.pk %}'>
+    <a href='{% url 'assistance:help-request-details' help_request.pk %}' class="btn btn-outline-light mt-2">
 
         Cancel
 
