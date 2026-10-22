@@ -178,7 +178,11 @@ class RideCreateForm(RideBaseForm):
         return departure_date
 
 class RideEditForm(RideBaseForm):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['ride_organizer'].disabled = True
+        self.fields['maximum_riders_to_join'].disabled = True
+
 
 
 class RideDeleteForm(RideBaseForm):
