@@ -63,6 +63,7 @@
 
                         <li>
                             {{ participant.nickname }}
+                            {% if ride.status == 'Planned' %}
                             <form
                                     method="post"
                                     action="{% url 'rides:leave-ride' ride.pk participant.pk %}"
@@ -74,6 +75,7 @@
                                     Leave Ride
                                 </button>
                             </form>
+                            {% endif %}
                         </li>
 
                     {% endfor %}
