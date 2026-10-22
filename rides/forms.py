@@ -243,11 +243,20 @@ class RideReviewBaseForm(forms.ModelForm):
                             'max_length': 'Ride review text must be less than 500 characters long.'},
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['ride'].queryset = Ride.objects.filter(status=choices.TripStatusChoices.COMPLETED)
+
+
     def clean(self):
         cleaned_data = super().clean()
 
         reviewer = cleaned_data.get('reviewer')
         ride = cleaned_data.get('ride')
+
+        if ride.status != choices.TripStatusChoices.COMPLETED:
+            raise forms.ValidationError('Reviews shall be submitted for rides with status COMPLETED only')
 
         organizer = ride.ride_organizer
         participants = ride.participants.all()

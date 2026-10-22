@@ -255,7 +255,7 @@ After applying the migrations, the evaluator can create all required objects man
 1. Create one or more riders
 2. Create a ride and select an existing rider as organizer
 3. Join riders to a planned ride
-4. Create reviews for organizers or participants
+4. Create reviews for rides
 5. Create roadside assistance requests
 
 The project does not rely on fixtures, custom data migrations, or initialization scripts.
