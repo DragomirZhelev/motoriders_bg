@@ -148,13 +148,13 @@ class RideBaseForm(forms.ModelForm):
 
         return cleaned_data
 
-    def clean_departure_date(self):
-        departure_date = self.cleaned_data['departure_date']
-
-        if departure_date < timezone.now():
-            raise forms.ValidationError('Departure Date must be in the future.')
-
-        return departure_date
+    # def clean_departure_date(self):
+    #     departure_date = self.cleaned_data['departure_date']
+    #
+    #     if departure_date < timezone.now():
+    #         raise forms.ValidationError('Departure Date must be in the future.')
+    #
+    #     return departure_date
 
     def clean_road_types(self):
         road_types = self.cleaned_data['road_types']
@@ -169,6 +169,13 @@ class RideCreateForm(RideBaseForm):
 
         self.fields['status'].choices = [(choices.TripStatusChoices.PLANNED, choices.TripStatusChoices.PLANNED ),]
 
+    def clean_departure_date(self):
+        departure_date = self.cleaned_data['departure_date']
+
+        if departure_date < timezone.now():
+            raise forms.ValidationError('Departure Date must be in the future.')
+
+        return departure_date
 
 class RideEditForm(RideBaseForm):
     pass
