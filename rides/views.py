@@ -66,6 +66,9 @@ class RideEditView(UpdateView):
     template_name = 'rides/ride-edit.html'
     context_object_name = 'ride'
 
+    def get_queryset(self):
+        return Ride.objects.filter(status = 'Planned')
+
     def get_success_url(self):
         return reverse_lazy('rides:ride-details', kwargs={'pk': self.object.pk})
 

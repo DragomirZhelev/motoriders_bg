@@ -36,11 +36,12 @@
         {{ help_request.status }}
     </p>
 
+    {% if help_request.status == "Open" %}
     <a href='{% url 'assistance:help-request-edit' help_request.pk %}'>
 
         Edit Request
-
     </a>
+    {% endif %}
 
     <a href='{% url 'assistance:help-request-delete' help_request.pk %}'>
 

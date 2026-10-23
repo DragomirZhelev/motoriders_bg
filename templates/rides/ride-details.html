@@ -63,6 +63,7 @@
 
                         <li>
                             {{ participant.nickname }}
+                            {{ participant.full_name }}
                             {% if ride.status == 'Planned' %}
                             <form
                                     method="post"
@@ -91,11 +92,11 @@
         </div>
 
         <div class="ride-actions">
-
+        {% if ride.status == 'Planned' %}
             <a href='{% url 'rides:ride-edit' ride.pk %}'>
                 Edit Ride
             </a>
-
+        {% endif %}
             <a href='{% url 'rides:ride-delete' ride.pk %}'>
                 Delete Ride
             </a>
