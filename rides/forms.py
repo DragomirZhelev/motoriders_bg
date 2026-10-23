@@ -183,7 +183,14 @@ class RideEditForm(RideBaseForm):
         self.fields['ride_organizer'].disabled = True
         self.fields['maximum_riders_to_join'].disabled = True
 
-
+    def clean(self):
+        cleaned_data = super().clean()
+        status = cleaned_data.get('status')
+        departure_date = cleaned_data.get('departure_date')
+        if status and departure_date:
+            if status == "Completed" and departure_date > timezone.now():
+                self.add_error('status', 'You can not set a Ride to Completed if the departure date is in the future. Use status Cancelled if needed.')
+        return cleaned_data
 
 class RideDeleteForm(RideBaseForm):
     def __init__(self, *args, **kwargs):
