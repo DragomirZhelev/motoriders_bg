@@ -32,14 +32,16 @@ class HelpRequestCreateView(CreateView):
     template_name = 'assistance/help-request-create.html'
     success_url = reverse_lazy('assistance:help-request-list')
 
-    def get_queryset(self):
-        return HelpRequest.objects.filter(status = "Open")
+
 
 class HelpRequestEditView(UpdateView):
     model = HelpRequest
     form_class = HelpRequestEditForm
     template_name = 'assistance/help-request-edit.html'
     context_object_name = 'help_request'
+
+    def get_queryset(self):
+        return HelpRequest.objects.filter(status = "Open")
 
     def get_success_url(self):
         return reverse_lazy('assistance:help-request-details', kwargs={'pk': self.object.pk})
