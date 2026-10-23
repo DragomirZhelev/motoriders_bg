@@ -178,10 +178,12 @@ def join_ride(request, pk):
 @require_POST
 def leave_ride(request, pk, rider_pk):
     ride = get_object_or_404(Ride, pk=pk)
-
     rider = get_object_or_404(Rider, pk=rider_pk)
 
-    if rider in ride.participants.all():
-        ride.participants.remove(rider)
+    status_ride = ride.status
+
+    if status_ride == 'Planned':
+        if rider in ride.participants.all():
+            ride.participants.remove(rider)
 
     return redirect('rides:ride-details', pk=pk)

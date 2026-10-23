@@ -1,5 +1,7 @@
 from django import forms
 from assistance.models import HelpRequest
+from common import choices
+
 
 class HelpRequestBaseForm(forms.ModelForm):
     class Meta:
@@ -60,7 +62,10 @@ class HelpRequestBaseForm(forms.ModelForm):
         }
 
 class HelpRequestCreateForm(HelpRequestBaseForm):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['status'].choices = [(choices.HelpRequestStatusChoices.OPEN, choices.HelpRequestStatusChoices.OPEN),]
 
 class HelpRequestEditForm(HelpRequestBaseForm):
     pass
