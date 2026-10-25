@@ -1,0 +1,31 @@
+<style>
+    .model-form-page { max-width: 900px; margin-inline: auto; }
+    .model-form-card { overflow: hidden; border-radius: 1rem; }
+    .model-form-card .card-header { background: #111 !important; border-bottom-color: var(--bs-danger) !important; }
+    .model-form-card form > p { margin-bottom: 1.25rem; }
+    .model-form-card form > p > label { display: block; margin-bottom: .4rem; color: var(--bs-light); font-weight: 600; }
+    .model-form-card form input:not([type="checkbox"]):not([type="hidden"]),
+    .model-form-card form select,
+    .model-form-card form textarea {
+        display: block; width: 100%; padding: .55rem .75rem; color: var(--bs-light);
+        background-color: #212529; border: 1px solid #495057; border-radius: .5rem;
+    }
+    .model-form-card form input[type="file"] { padding: .4rem; }
+    .model-form-card form input:focus,
+    .model-form-card form select:focus,
+    .model-form-card form textarea:focus {
+        border-color: var(--bs-danger); outline: 0; box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .2);
+    }
+    .model-form-card form select option { color: var(--bs-light); background-color: #212529; }
+    .model-form-card .helptext { display: block; margin-top: .35rem; color: #adb5bd; font-size: .875rem; }
+    .model-form-card ul.errorlist { margin: 0 0 .4rem; padding-left: 1.25rem; color: #ff8b95; }
+    .model-form-card form p > ul:not(.errorlist) {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .5rem;
+        margin: .5rem 0 0; padding: 0; list-style: none;
+    }
+    .model-form-card form p > ul:not(.errorlist) label {
+        display: flex; align-items: center; gap: .5rem; height: 100%; padding: .55rem .7rem;
+        background: #212529; border: 1px solid #495057; border-radius: .5rem;
+    }
+    .model-form-card form p > ul:not(.errorlist) input[type="checkbox"] { accent-color: var(--bs-danger); }
+</style>
