@@ -232,9 +232,7 @@ No environment variables or external credentials are required to run the project
 
 The project is configured for local development and uses Django's default development settings.
 
-The custom 404 error page is available in the project and can be tested by temporarily setting:
-
-DEBUG = False
+The custom 404 error page is available in the project. To preview it locally, temporarily set DEBUG = False in motoriders_bg/settings.py and set ALLOWED_HOSTS to include 127.0.0.1 and localhost. Restore the development settings after testing.
 
 ## Main Pages
 
