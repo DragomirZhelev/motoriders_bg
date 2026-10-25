@@ -21,7 +21,7 @@ The application allows riders to create profiles, organize group rides, join and
 
 ### Rides
 
-- Create, view, edit, and delete rides
+- Create, view, and delete rides, edit rides only in status Planned
 - Search rides by:
   - Ride title
   - Organizer name or nickname
@@ -68,11 +68,12 @@ The application allows riders to create profiles, organize group rides, join and
   - Riding difficulty
 - Display rating descriptions using custom template filters
 - Restrict reviews to the ride organizer or existing participants
+- Allow reviews only for rides with Completed Status
 - Enforce one review per rider for each ride through a database constraint
 
 ### Road Assistance
 
-- Create, view, edit, and delete roadside assistance requests
+- Create, view and delete roadside assistance requests; edit requests only in status Open
 - Record:
   - Rider requesting assistance
   - Request title
@@ -84,7 +85,7 @@ The application allows riders to create profiles, organize group rides, join and
 
 ## Additional Functionality
 
-- Full CRUD functionality for all main models
+- Create, view, edit and delete functionality for all models with editing restricted by status for rides and help requests
 - Search, filtering, and sorting through GET query parameters
 - Custom form validation
 - Custom model validators
@@ -253,8 +254,9 @@ After applying the migrations, the evaluator can create all required objects man
 1. Create one or more riders
 2. Create a ride and select an existing rider as organizer
 3. Join riders to a planned ride
-4. Create reviews for rides
-5. Create roadside assistance requests
+4. After the departure date has passed, edit the ride and set its status to Completed
+5. Create a review for that completed ride, using its organizer or a participant as the reviewer
+6. Create roadside assistance requests
 
 The project does not rely on fixtures, custom data migrations, or initialization scripts.
 
