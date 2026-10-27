@@ -276,14 +276,16 @@ class RideReviewBaseForm(forms.ModelForm):
         reviewer = cleaned_data.get('reviewer')
         ride = cleaned_data.get('ride')
 
-        if ride.status != choices.TripStatusChoices.COMPLETED:
-            raise forms.ValidationError('Reviews shall be submitted for rides with status COMPLETED only')
+        if reviewer and ride:
 
-        organizer = ride.ride_organizer
-        participants = ride.participants.all()
+            if ride.status != choices.TripStatusChoices.COMPLETED:
+                raise forms.ValidationError('Reviews shall be submitted for rides with status COMPLETED only')
 
-        if reviewer not in participants and reviewer != organizer:
-            raise forms.ValidationError('Only the organizer of the ride or the participants can submit a review')
+            organizer = ride.ride_organizer
+            participants = ride.participants.all()
+
+            if reviewer not in participants and reviewer != organizer:
+                raise forms.ValidationError('Only the organizer of the ride or the participants can submit a review')
 
         return cleaned_data
 
