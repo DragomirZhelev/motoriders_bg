@@ -254,7 +254,7 @@ After applying the migrations, the evaluator can create all required objects man
 1. Create one or more riders
 2. Create a ride and select an existing rider as organizer
 3. Join riders to a planned ride
-4. After the departure date has passed, edit the ride and set its status to Completed
+4. When creating a ride, choose a departure date and time in the future. The create form requires this. To test reviews, edit the ride after creating it: change its departure date and time to a past date, and set its status to Completed. The edit form prevents setting a ride to Completed while its departure date is still in the future.
 5. Create a review for that completed ride, using its organizer or a participant as the reviewer
 6. Create roadside assistance requests
 
